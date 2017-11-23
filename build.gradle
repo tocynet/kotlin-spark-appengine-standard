@@ -1,0 +1,56 @@
+buildscript {    // Configuration for building
+  repositories {
+    jcenter()    // Bintray's repository - a fast Maven Central mirror & more
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.google.cloud.tools:appengine-gradle-plugin:+'    // latest App Engine Gradle tasks
+    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.60'
+    classpath 'com.sparkjava::spark-core:2.7.1'    // latest Spring Boot Gradle tasks
+  }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'maven'
+apply plugin: 'war'
+apply plugin: 'com.google.cloud.tools.appengine'  // App Engine tasks
+
+group = 'com.google.appengine.demos'
+version = '1.0-SNAPSHOT'
+
+description = """"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+
+
+repositories {
+        
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'com.sparkjava', name: 'spark-template-mustache', version:'2.7.1'
+    compile group: 'com.google.appengine', name: 'appengine-api-1.0-sdk', version:'1.9.59'
+    compile group: 'jstl', name: 'jstl', version:'1.2'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version:'3.1.0'
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jre8', version:'1.1.51'
+    compile(group: 'com.sparkjava', name: 'spark-kotlin', version:'1.0.0-alpha') {
+exclude(module: 'jetty-server')
+exclude(module: 'jetty-io')
+exclude(module: 'jetty-security')
+exclude(module: 'jetty-webapp')
+exclude(module: 'jetty-util')
+exclude(module: 'jetty-client')
+exclude(module: 'websocket-api')
+exclude(module: 'websocket-client')
+exclude(module: 'websocket-common')
+exclude(module: 'websocket-server')
+exclude(module: 'slf4j-api')
+exclude(module: 'websocket-servlet')
+    }
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.25'
+}
